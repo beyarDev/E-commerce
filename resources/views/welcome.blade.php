@@ -29,7 +29,7 @@
             @endauth
         </div>
         @endif
-
+        <h1>Welcome To Beyar E-Commerce Website</h1>
         <div class="grid grid-cols-5 gap-5 m-6 mt-16">
             @foreach ($products as $product)
             <a class="w-52 items-center cursor-pointer flex flex-col" href="{{ url('/products/'. $product->product_id) }}">
