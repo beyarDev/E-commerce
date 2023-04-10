@@ -22,4 +22,12 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('searchItem');
+        $products = Product::where('name', 'ILIKE', '%' . $searchTerm . '%')->get();
+        return view('welcome', [
+            'products' => $products
+        ]);
+    }
 }
