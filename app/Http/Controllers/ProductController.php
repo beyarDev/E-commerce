@@ -10,6 +10,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+
         return view('welcome', [
             'products' => $products
         ]);
@@ -29,5 +30,9 @@ class ProductController extends Controller
         return view('welcome', [
             'products' => $products
         ]);
+    }
+    public function showBasket()
+    {
+        return view('basket');
     }
 }
