@@ -10,24 +10,25 @@
 </head>
 
 <body>
-    <x-header title="in products" />
+    <x-header title="products" />
     <div class="w-64 ml-8 mt-24 flex flex-col items-center justify-around gap-4">
         <p class="hidden" id="product_id">{{$product->product_id}}</p>
         <p class="hidden" id="image-url">{{$product->image_url}}</p>
         <h1 id="product-name">{{$product->name}}</h1>
-        <img src="{{$product->image_url}}" class="w-64">
+        <img src="{{$product->image_url}}" class="w-64 rounded">
         <p class="self-start">{{$product->description}}</p>
-        <span>Price <span class="text-red-600">£{{$product->price}}</span></span>
-        <button class="bg-green-300" id="add-btn">Add To Basket</button>
+        <span>Price <span class="text-red-600" id="product_price">£{{$product->price}}</span></span>
+        <button class="bg-orange-400 text-white p-2 border-1 rounded" id="add-btn">Add To Basket</button>
     </div>
     <script>
-        function addItemToLocalStorage(productId, productName, productImage) {
+        function addItemToLocalStorage(productId, productName, productImage, productPrice) {
             let quantity = 1;
             const product = {
                 productId,
                 productName,
                 productImage,
-                quantity
+                quantity,
+                productPrice
             }
             if (localStorage.getItem("products")) {
                 const {
@@ -65,11 +66,11 @@
             const productId = document.getElementById('product_id').textContent;
             const productName = document.getElementById('product-name').textContent;
             const productImage = document.getElementById('image-url').textContent;
-            addItemToLocalStorage(productId, productName, productImage)
+            const productPrice = document.getElementById('product_price').textContent;
+            addItemToLocalStorage(productId, productName, productImage, productPrice)
             const totalItems = document.getElementById('total-items');
             totalItems.textContent = localStorage.getItem("totalItems");
         })
-        console.log(localStorage.getItem("products"))
     </script>
 </body>
 

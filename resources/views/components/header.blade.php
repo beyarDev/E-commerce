@@ -14,9 +14,9 @@
             @endauth
         </div>
         @endif
-        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right flex">
             <div id="basket-wrapper"><a href="/basket" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-2">Basket</a>
-                <span id="total-items"></span>
+                <span id="total-items" class="p-1 border-2 border-orange-400 rounded-full"></span>
             </div>
             <a href="/orders" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 mx-2">Orders</a>
         </div>
