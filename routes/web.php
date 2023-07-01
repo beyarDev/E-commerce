@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderDetailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::get('/orders', [OrderDetailController::class, 'index']);
+Route::post('/orders', [OrderController::class, 'createOrder']);
 Route::get('/search', [ProductController::class, 'search']);
-Route::get('/basket',[ProductController::class, 'showBasket']);
+Route::get('/basket', [ProductController::class, 'showBasket']);
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

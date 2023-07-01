@@ -66,7 +66,7 @@
             const productId = document.getElementById('product_id').textContent;
             const productName = document.getElementById('product-name').textContent;
             const productImage = document.getElementById('image-url').textContent;
-            const productPrice = document.getElementById('product_price').textContent;
+            const productPrice = document.getElementById('product_price').textContent.substring(1);
             addItemToLocalStorage(productId, productName, productImage, productPrice)
             const totalItems = document.getElementById('total-items');
             totalItems.textContent = localStorage.getItem("totalItems");
