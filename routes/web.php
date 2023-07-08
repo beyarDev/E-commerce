@@ -21,9 +21,9 @@ Route::get('/', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
 Route::get('/orders', [OrderDetailController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'createOrder']);
+Route::delete('/orders', [OrderDetailController::class, 'cancelOrder']);
 Route::get('/search', [ProductController::class, 'search']);
 Route::get('/basket', [ProductController::class, 'showBasket']);
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');

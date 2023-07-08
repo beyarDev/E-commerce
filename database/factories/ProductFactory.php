@@ -72,7 +72,7 @@ class ProductFactory extends Factory
         $this->tracker += 1;
         return [
             'name' => $this->prducts[$this->tracker],
-            'description' => fake()->sentence(5),
+            'description' => fake()->sentence(35),
             'image_url' => "https://picsum.photos/id/" . strval(rand(1, 40)) . "/200/300",
             'price' => fake()->numberBetween(0, 1000),
             'category_id' => fake()->numberBetween(1, 3),

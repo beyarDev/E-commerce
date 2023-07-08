@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrderDetail;
 use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller
 {
     public function index()
     {
+        $orderDetail = new OrderDetail();
         if (Auth::check()) {
-            $orderDetails = [];
-            $user = Auth::user();
-            $orders = Order::where("customer_id", $user->id)->get();
-            foreach($orders as $order){
-                $orderDetail = OrderDetail::where("order_id", $order->order_id)->get();
-                $orderDetails = array_merge($orderDetails, $orderDetail->toArray());
-            }
-            
             return view("orders", [
-                "orders" => $orderDetails
+                "orders" => $orderDetail->getUserOrders()
             ]);
         } else {
-            return view("login");
+            return redirect('dashboard');
         }
+    }
+    public function cancelOrder(Request $req)
+    {
+        $product_id = $req->input()['product_id'];
+        OrderDetail::where('product_id', $product_id)->delete();
+        return response()->json([
+            'message' => 'success',
+        ], 200);
     }
 }

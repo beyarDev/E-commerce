@@ -9,18 +9,27 @@
     <title>Products</title>
 </head>
 
-<body>
+<body class="dark:bg-gray-900 text-white">
     <x-header title="products" />
-    <div class="w-64 ml-8 mt-24 flex flex-col items-center justify-around gap-4">
-        <p class="hidden" id="product_id">{{$product->product_id}}</p>
-        <p class="hidden" id="image-url">{{$product->image_url}}</p>
-        <h1 id="product-name">{{$product->name}}</h1>
-        <img src="{{$product->image_url}}" class="w-64 rounded">
-        <p class="self-start">{{$product->description}}</p>
-        <span>Price <span class="text-red-600" id="product_price">£{{$product->price}}</span></span>
-        <button class="bg-orange-400 text-white p-2 border-1 rounded" id="add-btn">Add To Basket</button>
+    <p id="basket-message" class="hidden absolute top-1/3 right-1/2 border-2 p-4 rounded bg-green-900"> Item added to the basket</p>
+    <div class="flex mt-24 justify-start ml-16">
+        <div class="w-64 flex flex-col items-center justify-around gap-4">
+            <p class="hidden" id="product_id">{{$product->product_id}}</p>
+            <p class="hidden" id="image-url">{{$product->image_url}}</p>
+            <h1 id="product-name">{{$product->name}}</h1>
+            <img src="{{$product->image_url}}" class="w-64 rounded">
+        </div>
+        <div class="flex flex-col ml-12 mt-8">
+            <p class="max-w-sm">{{$product->description}}</p>
+            <div class="mt-8">
+                <span>Price <span class="text-red-600 mr-4" id="product_price">£{{$product->price}}</span></span>
+                <button class="bg-orange-400 text-white p-2 border-1 rounded" id="add-btn">Add To Basket</button>
+            </div>
+        </div>
     </div>
+
     <script>
+        const basketMessage = document.getElementById('basket-message');
         function addItemToLocalStorage(productId, productName, productImage, productPrice) {
             let quantity = 1;
             const product = {
@@ -70,7 +79,14 @@
             addItemToLocalStorage(productId, productName, productImage, productPrice)
             const totalItems = document.getElementById('total-items');
             totalItems.textContent = localStorage.getItem("totalItems");
+            setTimeout(()=>{
+                basketMessage.style = "display:block"
+            },100)
+            setTimeout(()=>{
+                basketMessage.style = "display:hidden"
+            },2000)
         })
+        
     </script>
 </body>
 

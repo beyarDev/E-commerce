@@ -12,7 +12,7 @@ class OrderController extends Controller
 {
 
 
-    public function createOrder(Request $req): RedirectResponse
+    public function createOrder(Request $req)
     {
         //checking if user is logged in
         if (Auth::check()) {
@@ -22,6 +22,7 @@ class OrderController extends Controller
             // we should retrieve actual price of the products from the database
             // using their ID's as we can't trust data from client side
             // depending how you setup your payment service you might not need to do so
+
             // counting the total price for all products;
             foreach ($orderData as $order) {
                 $totalPrice = $order["productPrice"] * $order["quantity"];
@@ -48,9 +49,13 @@ class OrderController extends Controller
                 $orderDetail->order_id = $orderId;
                 $orderDetail->save();
             }
-            return redirect("/");
+            return response()->json([
+                'message' => 'success',
+            ], 200);
         } else {
-            return redirect("/login");
+            return response()->json([
+                'message' => 'please login',
+            ], 403);
         }
     }
 }
