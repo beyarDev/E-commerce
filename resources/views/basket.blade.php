@@ -73,9 +73,10 @@
         const products = window.localStorage.getItem("products")
         const orderSuccessMessage = document.getElementById("order-success-message")
         placeOrderButton.disabled = true
+        const baseUrl = new URL(window.location.href).origin;
         if (products) {
             const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
-            fetch('/orders', {
+            fetch(`${baseUrl}/orders`, {
                     method: 'post',
                     body: products,
                     headers: {
@@ -88,10 +89,10 @@
                         orderSuccessMessage.style = "display:block"
                         localStorage.clear()
                         setTimeout(() => {
-                            window.location.assign("http://127.0.0.1:8000/orders")
+                            window.location.assign(`${baseUrl}/orders`)
                         }, 2000)
                     } else {
-                        window.location.assign("http://127.0.0.1:8000/login")
+                        window.location.assign(`${baseUrl}/login`)
                     }
                 })
                 .catch(error => console.error(error));

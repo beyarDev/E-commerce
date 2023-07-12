@@ -38,7 +38,9 @@
             const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
             const cancelOrderButton = document.getElementById("cancel-order-btn");
             cancelOrderButton.disabled = true;
-            fetch('/orders', {
+            const baseUrl = new URL(window.location.href).origin;
+
+            fetch(`${baseUrl}/orders`, {
                     method: 'delete',
                     body: JSON.stringify({
                         product_id
