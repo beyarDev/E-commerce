@@ -3,7 +3,7 @@ FROM php:8.1 as php
 RUN apt-get update -y
 
 RUN apt-get update && \
-    apt-get install -y libpq-dev && \
+    apt-get install -y zip unzip libpq-dev && \
     docker-php-ext-install pdo_pgsql
 
 
