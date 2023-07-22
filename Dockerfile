@@ -1,17 +1,9 @@
-FROM php:8.1 as php
+FROM php:8.1-fpm-alpine
 
-RUN apt-get update -y
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get update && \
-    apt-get install -y zip unzip libpq-dev && \
-    docker-php-ext-install pdo_pgsql
+RUN set -ex \
+	&& apk --no-cache add postgresql-dev nodejs npm\
+	&& docker-php-ext-install pdo pdo_pgsql
 
-
-WORKDIR /var/www
-
-COPY . .
-
-COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
-
-ENV PORT=8000
-ENTRYPOINT [ "Docker/entrypoint.sh" ]
+WORKDIR /var/www/html
